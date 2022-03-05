@@ -3,7 +3,7 @@ const path = require("path");
 
 const app = express();
 
-//4. index.js를 사용하도록 설정
+// 4. index.js를 사용하도록 설정
 app.use("/js", express.static(path.resolve("frontend", "js")));
 
 // 3. frontend 디렉토리의 index.html을 가져옴
