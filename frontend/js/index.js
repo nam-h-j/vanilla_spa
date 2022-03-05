@@ -9,6 +9,7 @@ import Error from "./view/Error.js";
 // href가 아닌 navigateTo를 실행하고 페이지를 바꾸는 처리를 추가
 const navigateTo = (url) => {
   history.pushState(null, null, url);
+  console.log(history);
   router();
 };
 
