@@ -1,3 +1,9 @@
+import Dashboard from "./view/Dashboard.js";
+import Posts from "./view/Posts.js";
+import Settings from "./view/Settings.js";
+import Error from "./view/Error.js";
+//8. view들을 import 시킨다
+
 // 6. 네비게이션으로 페이지 이동시 리프레시 방지 처리
 // html에 작성된 data-link 프로퍼티를 통해서 네비를 클릭했을때
 // href가 아닌 navigateTo를 실행하고 페이지를 바꾸는 처리를 추가
@@ -9,10 +15,11 @@ const navigateTo = (url) => {
 // 5. router를 만들어준다
 const router = async () => {
   const routes = [
-    { path: "/", view: () => console.log("viewing dashboard") },
-    { path: "/posts", view: () => console.log("viewing posts") },
-    { path: "/settings", view: () => console.log("viewing settings") },
-    { path: "/error", view: () => console.log("viewing 404") },
+    //9. 각 뷰를 각 라우터에 할당
+    { path: "/", view: Dashboard },
+    { path: "/posts", view: Posts },
+    { path: "/settings", view: Settings },
+    { path: "/error", view: Error },
   ];
 
   const potentialMatches = routes.map((route) => {
@@ -32,7 +39,8 @@ const router = async () => {
       (potentialMatch) => potentialMatch.route.path === "/error"
     );
   }
-  match.route.view();
+  const view = new match.route.view();
+  document.getElementById("app").innerHTML = await view.getHtml();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
